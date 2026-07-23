@@ -3,8 +3,8 @@
 # so this scaffold uses mystmd directly rather than the old `jupyter-book` CLI.
 version: 1
 project:
-  id: grounded-ai-rag-tutorial
-  title: "Grounded AI: An Interactive RAG Tutorial Series"
+  id: vector-space-rag-tutorial
+  title: "Vector Space: An Interactive RAG Tutorial Series"
   description: >
     A beginner-friendly, hands-on course on Retrieval-Augmented Generation
     for technical/vocational students with no ML background.
@@ -31,10 +31,14 @@ project:
 
 site:
   template: book-theme
-  title: "Grounded AI"
+  title: "Vector Space"
   options:
     # Enables the in-browser Python kernel (Pyodide/WASM via Thebe-lite).
     # This is what actually makes "run this code" real for readers —
     # Jupyter Book/MyST does NOT do this by default, it has to be turned on.
     thebe: true
     thebe_lite: true
+  parts:
+    # Empty file = no footer content = the default "Made with MyST" badge
+    # doesn't get shown. See primary-sidebar-footer.md.
+    toc_footer: primary-sidebar-footer.md
