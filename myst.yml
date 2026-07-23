@@ -1,0 +1,40 @@
+# MyST project config — this is Jupyter Book 2 (mystmd), the actively developed
+# toolchain as of 2026. Jupyter Book v1 (Sphinx-based) is in maintenance mode,
+# so this scaffold uses mystmd directly rather than the old `jupyter-book` CLI.
+version: 1
+project:
+  id: grounded-ai-rag-tutorial
+  title: "Grounded AI: An Interactive RAG Tutorial Series"
+  description: >
+    A beginner-friendly, hands-on course on Retrieval-Augmented Generation
+    for technical/vocational students with no ML background.
+  authors:
+    - name: Vel
+  toc:
+    - file: intro.md
+    - title: "Chapter 1: What is RAG?"
+      file: chapters/01-what-is-rag.ipynb
+    - title: "Chapter 2: Why RAG Matters"
+      file: chapters/02-why-rag-matters.md
+    - title: "Chapter 3: RAG Architecture Deep-Dive"
+      file: chapters/03-architecture.md
+    - title: "Chapter 4: Building Your First RAG System"
+      file: chapters/04-first-rag-system.ipynb
+    - title: "Chapter 5: Advanced RAG Patterns"
+      file: chapters/05-advanced-patterns.ipynb
+    - title: "Chapter 6: RAG for Vocational Education"
+      file: chapters/06-vocational-education.md
+    - title: "Chapter 7: Evaluation & Assessment"
+      file: chapters/07-evaluation.ipynb
+    - title: "Chapter 8: Beyond RAG"
+      file: chapters/08-beyond-rag.md
+
+site:
+  template: book-theme
+  title: "Grounded AI"
+  options:
+    # Enables the in-browser Python kernel (Pyodide/WASM via Thebe-lite).
+    # This is what actually makes "run this code" real for readers —
+    # Jupyter Book/MyST does NOT do this by default, it has to be turned on.
+    thebe: true
+    thebe_lite: true
