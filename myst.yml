@@ -3,13 +3,14 @@
 # so this scaffold uses mystmd directly rather than the old `jupyter-book` CLI.
 version: 1
 project:
-  id: vector-space-rag-tutorial
-  title: "Vector Space: An Interactive RAG Tutorial Series"
+  id: velmurugan-narayanasamy-site
+  title: "Velmurugan Narayanasamy"
   description: >
-    A beginner-friendly, hands-on course on Retrieval-Augmented Generation
-    for technical/vocational students with no ML background.
+    AI/ML researcher working on computer vision, pose estimation, and 3D
+    perception. Personal site, project write-ups, and Grounded AI, an
+    interactive RAG tutorial series.
   authors:
-    - name: Vel
+    - name: Velmurugan Narayanasamy
   toc:
     - file: intro.md
     - file: about.md
@@ -35,7 +36,7 @@ project:
 
 site:
   template: book-theme
-  title: "Vector Space"
+  title: "Velmurugan Narayanasamy"
   options:
     # Enables the in-browser Python kernel (Pyodide/WASM via Thebe-lite).
     # This is what actually makes "run this code" real for readers —
@@ -43,6 +44,8 @@ site:
     thebe: true
     thebe_lite: true
   parts:
-    # Empty file = no footer content = the default "Made with MyST" badge
-    # doesn't get shown. See primary-sidebar-footer.md.
-    toc_footer: primary-sidebar-footer.md
+    # Correct key is primary_sidebar_footer (I had the wrong key,
+    # `toc_footer`, before — that's a no-op and did nothing).
+    # Empty file = no footer content = the default "Made with MyST"
+    # badge at the bottom of the sidebar doesn't get shown.
+    primary_sidebar_footer: primary-sidebar-footer.md

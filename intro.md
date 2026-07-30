@@ -1,12 +1,13 @@
-# Vector Space
+# Velmurugan Narayanasamy
 
-Research notes and project write-ups from Vel — AI/ML research in
-computer vision, pose estimation, and 3D perception, plus *Grounded AI*,
-an interactive from-scratch tutorial series on Retrieval-Augmented
-Generation.
+AI/ML researcher working on computer vision, pose estimation, and 3D
+perception for industrial and scientific applications. Based in Siegen,
+Germany, at Universität Siegen.
 
-[Read more about me →](about.md)
+This site collects my project work and research notes, including
+*Grounded AI*, an interactive, from-scratch tutorial series on
+Retrieval-Augmented Generation.
 
-[See my projects →](projects.md)
-
-[Start the Grounded AI tutorial series →](chapters/01-what-is-rag.ipynb)
+[About →](about.md)
+[Projects →](projects.md)
+[Grounded AI: RAG Tutorial Series →](chapters/01-what-is-rag.ipynb)
