@@ -1,8 +1,9 @@
 # Velmurugan Narayanasamy
 
-AI/ML researcher working on computer vision, pose estimation, and 3D
-perception for industrial and scientific applications. Based in Siegen,
-Germany, at Universität Siegen.
+Research associate at the Institut für Erziehungswissenschaft,
+Universität Stuttgart, working at the intersection of AI and technical /
+vocational education — with a background in computer vision, robotics,
+and pose estimation from mechatronics and a Fraunhofer IPA collaboration.
 
 This site collects my project work and research notes, including
 *Grounded AI*, an interactive, from-scratch tutorial series on
