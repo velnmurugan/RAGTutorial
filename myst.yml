@@ -38,6 +38,10 @@ site:
   template: book-theme
   title: "Velmurugan Narayanasamy"
   options:
+    # This is what was actually showing "Made with MyST" in the top-left
+    # header — it's a fallback that only appears because logo_text isn't
+    # set. Setting it here is what fixes the top masthead.
+    logo_text: "Velmurugan Narayanasamy"
     # Enables the in-browser Python kernel (Pyodide/WASM via Thebe-lite).
     # This is what actually makes "run this code" real for readers —
     # Jupyter Book/MyST does NOT do this by default, it has to be turned on.

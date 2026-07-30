@@ -1,8 +1,7 @@
-# Velmurugan Narayanasamy
 
 Research associate at the Institut für Erziehungswissenschaft,
 Universität Stuttgart, working at the intersection of AI and technical /
-vocational education — with a background in computer vision, robotics,
+vocational education with a background in computer vision, robotics,
 and pose estimation from mechatronics and a Fraunhofer IPA collaboration.
 
 This site collects my project work and research notes, including
