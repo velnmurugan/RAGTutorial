@@ -11,6 +11,12 @@ project:
     interactive RAG tutorial series.
   authors:
     - name: Velmurugan Narayanasamy
+  # This is the REAL switch for in-browser runnable code. `site.options.thebe`
+  # (below, now removed) doesn't exist as a config key and never did anything.
+  # `project.jupyter.lite: true` is what actually turns on JupyterLite/Pyodide
+  # so readers can press the power button at the top of a page and run cells.
+  jupyter:
+    lite: true
   toc:
     - file: intro.md
     - file: about.md
@@ -28,11 +34,6 @@ site:
     # header — it's a fallback that only appears because logo_text isn't
     # set. Setting it here is what fixes the top masthead.
     logo_text: "Velmurugan Narayanasamy"
-    # Enables the in-browser Python kernel (Pyodide/WASM via Thebe-lite).
-    # This is what actually makes "run this code" real for readers —
-    # Jupyter Book/MyST does NOT do this by default, it has to be turned on.
-    thebe: true
-    thebe_lite: true
   parts:
     # Correct key is primary_sidebar_footer (I had the wrong key,
     # `toc_footer`, before — that's a no-op and did nothing).
