@@ -25,6 +25,8 @@ project:
       children:
         - title: "Chapter 1: What is RAG?"
           file: chapters/01-what-is-rag.ipynb
+        - title: "Chapter 2: What Are Embeddings?"
+          file: chapters/02-embeddings.ipynb
 
 site:
   template: book-theme
