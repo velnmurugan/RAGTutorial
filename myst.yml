@@ -31,6 +31,18 @@ project:
           file: chapters/03-chunking.ipynb
         - title: "Chapter 4: Completing the Loop"
           file: chapters/04-generation.ipynb
+        - title: "Chapter 5: Trustworthy Answers"
+          file: chapters/05-citations.ipynb
+        - title: "Chapter 6: Scaling Retrieval"
+          file: chapters/06-scaling.ipynb
+        - title: "Chapter 7: Hybrid Search"
+          file: chapters/07-hybrid-search.ipynb
+        - title: "Chapter 8: Re-ranking"
+          file: chapters/08-reranking.ipynb
+        - title: "Chapter 9: Evaluation"
+          file: chapters/09-evaluation.ipynb
+        - title: "Chapter 10: The Capstone"
+          file: chapters/10-capstone.ipynb
 
 site:
   template: book-theme
