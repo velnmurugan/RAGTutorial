@@ -27,6 +27,10 @@ project:
           file: chapters/01-what-is-rag.ipynb
         - title: "Chapter 2: What Are Embeddings?"
           file: chapters/02-embeddings.ipynb
+        - title: "Chapter 3: Chunking Long Documents"
+          file: chapters/03-chunking.ipynb
+        - title: "Chapter 4: Completing the Loop"
+          file: chapters/04-generation.ipynb
 
 site:
   template: book-theme
