@@ -69,7 +69,12 @@ site:
     # it needs its own background for contrast on any tab bar color).
     # site.title (browser tab text, SEO metadata) is staying as the full
     # name for now, only this icon and the in-page logo_text changed.
-    favicon: favicon.svg
+    # PNG, not SVG: favicon.svg 404'd on the live site even though
+    # logo.svg (also SVG) worked fine for the header, mystmd's own docs
+    # example for `favicon` uses .ico, not .svg, unlike the `logo`
+    # examples, so SVG favicons look like a real unsupported case, not
+    # a config mistake. Converted the same design to a 256x256 PNG.
+    favicon: favicon.png
     # Custom stylesheet. Only ever targets our own `:class:` names
     # attached explicitly in markdown, not the theme's internal classes.
     style: ./site.css
