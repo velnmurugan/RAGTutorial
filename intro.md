@@ -1,13 +1,53 @@
+---
+title: Velmurugan Narayanasamy
+site:
+  hide_title_block: true
+---
 
-Research associate at the Institut für Erziehungswissenschaft,
-Universität Stuttgart, working at the intersection of AI and technical /
-vocational education with a background in computer vision, robotics,
-and pose estimation from mechatronics and a Fraunhofer IPA collaboration.
++++ {"kind": "centered"}
 
-This site collects my project work and research notes, including
+Research Associate · AI for Technical Education
+
+## Velmurugan Narayanasamy
+
+I work at the intersection of trustworthy AI, machine learning, and
+technical education, with a background in computer vision and
+mechatronics. This site collects my project work, research notes, and
 *Grounded AI*, an interactive, from-scratch tutorial series on
 Retrieval-Augmented Generation.
 
-[About →](about.md)
-[Projects →](projects.md)
-[Grounded AI: RAG Tutorial Series →](chapters/01-what-is-rag.ipynb)
+{button}`Explore Grounded AI <chapters/00-overview.md>`
+[View Projects →](projects.md)
+
++++
+
+::::{grid} 1 1 3 3
+
+:::{card} ◉ Grounded AI
+:link: chapters/00-overview.md
+
+Learn RAG from first principles. Ten interactive chapters, built from
+scratch.
++++
+Start the tutorial →
+:::
+
+:::{card} Research
+:link: about.md
+
+Trustworthy AI and technical education, with a background in computer
+vision and mechatronics.
++++
+About my work →
+:::
+
+:::{card} Projects
+:link: projects.md
+
+Computer vision, machine learning, scientific computing, and
+probabilistic modeling.
++++
+Explore projects →
+:::
+
+::::

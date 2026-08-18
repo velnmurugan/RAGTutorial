@@ -23,6 +23,8 @@ project:
     - file: projects.md
     - title: "Grounded AI: An Interactive RAG Tutorial Series"
       children:
+        - title: "Series Overview"
+          file: chapters/00-overview.md
         - title: "Chapter 1: What is RAG?"
           file: chapters/01-what-is-rag.ipynb
         - title: "Chapter 2: What Are Embeddings?"
@@ -50,11 +52,31 @@ site:
   options:
     # This is what was actually showing "Made with MyST" in the top-left
     # header — it's a fallback that only appears because logo_text isn't
-    # set. Setting it here is what fixes the top masthead.
-    logo_text: "Velmurugan Narayanasamy"
+    # set. Setting it here is what fixes the top masthead. Displays as
+    # "Vector Space" (matches the vectorspace.blog domain) even though
+    # site.title above stays the full name, since site.title still drives
+    # the browser tab title and other metadata.
+    logo_text: "Vector Space"
+  # Top-level site nav, shown in the header on every page, separate from
+  # the primary sidebar's table of contents. Gives Grounded AI equal
+  # top-level billing instead of being buried a level deep in the TOC.
+  # Paths omit file extensions per MyST's site.nav convention. Clicking
+  # the name/logo in the header already goes home, so "Home" isn't
+  # duplicated here.
+  nav:
+    - title: About
+      url: /about
+    - title: Projects
+      url: /projects
+    - title: "◉ Grounded AI"
+      url: /chapters/00-overview
+    - title: "GitHub ↗"
+      url: https://github.com/velnmurugan
   parts:
     # Correct key is primary_sidebar_footer (I had the wrong key,
     # `toc_footer`, before — that's a no-op and did nothing).
     # Empty file = no footer content = the default "Made with MyST"
     # badge at the bottom of the sidebar doesn't get shown.
     primary_sidebar_footer: primary-sidebar-footer.md
+    # Site-wide footer, rendered at the bottom of every page.
+    footer: footer.md
