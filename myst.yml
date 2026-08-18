@@ -57,6 +57,13 @@ site:
     # site.title above stays the full name, since site.title still drives
     # the browser tab title and other metadata.
     logo_text: "Vector Space"
+    # Custom mark: three vectors fanning from one origin point, a nod to
+    # "vector space" that also reads as a "V". logo.svg has dark strokes
+    # for light backgrounds, logo-dark.svg has light strokes for dark
+    # backgrounds/dark mode.
+    logo: logo.svg
+    logo_dark: logo-dark.svg
+    logo_alt: "Vector Space logo: three vectors from one point"
   # Top-level site nav, shown in the header on every page, separate from
   # the primary sidebar's table of contents. Gives Grounded AI equal
   # top-level billing instead of being buried a level deep in the TOC.

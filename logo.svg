@@ -1,0 +1,12 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vector Space logo">
+  <title>Vector Space</title>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="7.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#1f2937" />
+    </marker>
+  </defs>
+  <line x1="50" y1="80" x2="26" y2="28" stroke="#1f2937" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow)" />
+  <line x1="50" y1="80" x2="50" y2="16" stroke="#1f2937" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow)" />
+  <line x1="50" y1="80" x2="74" y2="28" stroke="#1f2937" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow)" />
+  <circle cx="50" cy="80" r="4" fill="#1f2937" />
+</svg>
