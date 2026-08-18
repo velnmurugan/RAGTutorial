@@ -1,5 +1,13 @@
 [build]
-  command = "npm install -g mystmd && myst build --html"
+  # The final grep/xargs/sed step is a workaround for a confirmed, still-open
+  # upstream bug: mystmd's static HTML build bakes "http://localhost:3000"
+  # into sitemap.xml, robots.txt, and other generated files instead of the
+  # real production domain (jupyter-book/myst-theme#669, confirmed by a
+  # mystmd maintainer, not something wrong in this repo's own config).
+  # `xargs -r` skips running sed at all if grep finds nothing, so this is
+  # safe to leave in even after an eventual upstream fix. Remove once that
+  # issue is closed.
+  command = "npm install -g mystmd && myst build --html && grep -RIl 'http://localhost:3000' ./_build 2>/dev/null | xargs -r sed -i 's|http://localhost:3000|https://vectorspace.blog|g'"
   publish = "_build/html"
 
 [build.environment]
