@@ -10,11 +10,15 @@ Research Associate · AI for Technical Education
 
 ## Velmurugan Narayanasamy
 
+:::{div}
+:class: hero-copy
+
 I work at the intersection of trustworthy AI, machine learning, and
 technical education, with a background in computer vision and
 mechatronics. This site collects my project work, research notes, and
 *Grounded AI*, an interactive, from-scratch tutorial series on
 Retrieval-Augmented Generation.
+:::
 
 {button}`Explore Grounded AI <chapters/00-overview.md>`
 [View Projects →](projects.md)

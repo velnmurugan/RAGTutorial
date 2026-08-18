@@ -1,0 +1,13 @@
+/* Custom site-wide CSS. Classes here are attached explicitly to content
+   via `:class:` in markdown, never targeting the theme's own internal
+   class names, since those aren't documented and this can't be checked
+   against a live build. See https://mystmd.org/guide/website-style */
+
+/* Constrains the homepage hero paragraph to a comfortable reading width
+   instead of stretching to the full content column, which made it look
+   wider than the heading above it and harder to read line to line. */
+.hero-copy {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}

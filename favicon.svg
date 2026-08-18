@@ -1,0 +1,8 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vector Space favicon">
+  <title>Vector Space</title>
+  <rect x="4" y="4" width="92" height="92" rx="20" fill="#3b3fa8" />
+  <line x1="50" y1="76" x2="30" y2="34" stroke="#f4f4f2" stroke-width="9" stroke-linecap="round" />
+  <line x1="50" y1="76" x2="50" y2="22" stroke="#f4f4f2" stroke-width="9" stroke-linecap="round" />
+  <line x1="50" y1="76" x2="70" y2="34" stroke="#f4f4f2" stroke-width="9" stroke-linecap="round" />
+  <circle cx="50" cy="76" r="6" fill="#f4f4f2" />
+</svg>

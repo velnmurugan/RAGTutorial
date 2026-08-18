@@ -64,6 +64,15 @@ site:
     logo: logo.svg
     logo_dark: logo-dark.svg
     logo_alt: "Vector Space logo: three vectors from one point"
+    # Browser tab icon: same mark, but on a solid indigo chip (unlike the
+    # header logo, a favicon doesn't get separate light/dark variants, so
+    # it needs its own background for contrast on any tab bar color).
+    # site.title (browser tab text, SEO metadata) is staying as the full
+    # name for now, only this icon and the in-page logo_text changed.
+    favicon: favicon.svg
+    # Custom stylesheet. Only ever targets our own `:class:` names
+    # attached explicitly in markdown, not the theme's internal classes.
+    style: ./site.css
   # Top-level site nav, shown in the header on every page, separate from
   # the primary sidebar's table of contents. Gives Grounded AI equal
   # top-level billing instead of being buried a level deep in the TOC.
