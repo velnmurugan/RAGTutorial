@@ -11,6 +11,12 @@ project:
     interactive RAG tutorial series.
   authors:
     - name: Velmurugan Narayanasamy
+  # OneSignal (web push notifications) requires its worker file to be served
+  # from the site root, exactly as-is, at /OneSignalSDKWorker.js. static_files
+  # copies it there without hashing or rendering a link — same mechanism
+  # used for files like CNAME in mystmd's own docs.
+  static_files:
+    - OneSignalSDKWorker.js
   # This is the REAL switch for in-browser runnable code. `site.options.thebe`
   # (below, now removed) doesn't exist as a config key and never did anything.
   # `project.jupyter.lite: true` is what actually turns on JupyterLite/Pyodide

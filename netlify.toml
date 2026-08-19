@@ -7,7 +7,18 @@
   # `xargs -r` skips running sed at all if grep finds nothing, so this is
   # safe to leave in even after an eventual upstream fix. Remove once that
   # issue is closed.
-  command = "npm install -g mystmd && myst build --html && grep -RIl 'http://localhost:3000' ./_build 2>/dev/null | xargs -r sed -i 's|http://localhost:3000|https://vectorspace.blog|g'"
+  #
+  # The final `find ... -exec sed` step injects the OneSignal web push
+  # snippet into every built page's <head>. mystmd only has named site
+  # options for two analytics providers (analytics_google, analytics_
+  # plausible) — no generic "add a script to <head>" config key exists, so
+  # this is a post-build injection, same technique as the sitemap fix above.
+  # The OneSignal service worker itself (OneSignalSDKWorker.js) is handled
+  # separately via project.static_files in myst.yml, not this step.
+  # Note: this sed uses `#` as its delimiter, not `|` — the OneSignal
+  # snippet contains a literal `||` (JS logical OR), which would collide
+  # with a `|` delimiter and silently break the sed command.
+  command = "npm install -g mystmd && myst build --html && grep -RIl 'http://localhost:3000' ./_build 2>/dev/null | xargs -r sed -i 's|http://localhost:3000|https://vectorspace.blog|g' && find ./_build/html -name '*.html' -exec sed -i 's#</head>#<script src=\"https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js\" defer></script><script>window.OneSignalDeferred=window.OneSignalDeferred||[];OneSignalDeferred.push(async function(OneSignal){await OneSignal.init({appId:\"f3e23df9-46ae-43c6-b313-5a714d66def0\"});});</script></head>#' {} +"
   publish = "_build/html"
 
 [build.environment]
