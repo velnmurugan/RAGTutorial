@@ -1,6 +1,6 @@
-# ◈ Paper Reads: Weekly LLM Papers, Explained
+# ◈ Vector Reads: 10-Minute LLM Paper Reads
 
-One recent LLM paper a week, explained in plain language. Not a bullet-point
+One recent LLM paper a week, in about 10 minutes. Not a bullet-point
 recap of the abstract: each post walks through the real mechanism with a
 worked example, an analogy that actually made it click for me, the honest
 limitations the authors admit to themselves, and where it connects back to

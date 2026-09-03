@@ -1,6 +1,6 @@
 # Your LLM Can Now Tell the Inference Engine What to Ignore
 
-*5-min paper read · [Language Models Can Control Their Own Attention](https://arxiv.org/abs/2609.02737), Namgyu Ho, Huzama Ahmad, Woosung Koh, Se-Young Yun, Tal Schuster, Cicero Nogueira dos Santos (KAIST AI)*
+*10-min paper read · [Language Models Can Control Their Own Attention](https://arxiv.org/abs/2609.02737), Namgyu Ho, Huzama Ahmad, Woosung Koh, Se-Young Yun, Tal Schuster, Cicero Nogueira dos Santos (KAIST AI)*
 
 ## TL;DR
 
