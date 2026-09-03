@@ -51,6 +51,12 @@ project:
           file: chapters/09-evaluation.ipynb
         - title: "Chapter 10: The Capstone"
           file: chapters/10-capstone.ipynb
+    - title: "Paper Reads"
+      children:
+        - title: "Overview"
+          file: paper-reads/00-overview.md
+        - title: "Language Models Can Control Their Own Attention"
+          file: paper-reads/01-declarative-attention.md
 
 site:
   template: book-theme
@@ -97,6 +103,8 @@ site:
       url: /projects
     - title: "◉ Grounded AI"
       url: /chapters/00-overview
+    - title: "◈ Paper Reads"
+      url: /paper-reads/00-overview
     - title: "GitHub ↗"
       url: https://github.com/velnmurugan
   parts:
