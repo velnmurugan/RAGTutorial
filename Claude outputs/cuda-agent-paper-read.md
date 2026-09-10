@@ -1,4 +1,4 @@
-# Teaching an LLM to Write Faster CUDA Than torch.compile
+# Teaching an LLM to Write CUDA Kernels 2x Faster Than torch.compile
 
 *10-min paper read · [CUDA Agent: Large-Scale Agentic RL for High-Performance CUDA Kernel Generation](https://arxiv.org/abs/2602.24286), Weinan Dai, Hanlin Wu, Qiying Yu, Huan-ang Gao, Jiahao Li, Chengquan Jiang, Weiqiang Lou, Yufan Song, Hongli Yu, Jiaze Chen, Wei-Ying Ma, Ya-Qin Zhang, Jingjing Liu, Mingxuan Wang, Xin Liu, Hao Zhou (ByteDance Seed)*
 
@@ -72,7 +72,7 @@ One more real detail worth including: training wasn't smooth from the start. The
 
 A few real gaps, not invented ones:
 
-**No comparison against the specific systems it's positioned against.** The paper names Kevin, CUDA-L1, ConCuR, STARK, ReGraphT, EvoEngineer, and CudaForge directly as prior work, but the actual benchmark table only compares CUDA Agent against general frontier models (Claude Opus 4.5, Gemini 3 Pro) and its own untrained base model. We don't actually get numbers showing it beats the specialized systems it explicitly contrasts itself with in the related work section.
+**No comparison against the specific systems it's positioned against, and at least one of them already claims a bigger number.** The paper names Kevin, CUDA-L1, ConCuR, STARK, ReGraphT, EvoEngineer, and CudaForge directly as prior work, but the actual benchmark table only compares CUDA Agent against general frontier models (Claude Opus 4.5, Gemini 3 Pro, GLM 4.6, Kimi K2) and its own untrained base model. That gap matters concretely here: CUDA-L1, one of the systems named directly as prior work, separately reports a 2.77x average speedup over torch.compile on the same KernelBench suite, versus CUDA Agent's own 2.11x. CUDA Agent's paper never puts these two systems side by side, so the "2x faster than torch.compile" headline is real and paper-verified, but it isn't the best number posted against torch.compile on this benchmark, just the best one this specific paper chose to report.
 
 **Demonstrated scope is KernelBench, not "all CUDA."** Everything here is shown on a specific benchmark with three defined tiers. That's a real, broad test, but it's still a defined scope. Whether this generalizes to kernel-writing tasks well outside that distribution, a brand-new GPU architecture, or workloads structurally unlike anything in KernelBench, isn't something the paper demonstrates, and I'd be careful extrapolating past what's actually shown.
 

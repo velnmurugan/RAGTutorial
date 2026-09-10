@@ -15,7 +15,7 @@ A model that tells the inference engine which parts of the context it can
 skip, cutting attention cost by up to 52% for almost no accuracy loss.
 :::
 
-:::{card} Teaching an LLM to Write Faster CUDA Than torch.compile
+:::{card} Teaching an LLM to Write CUDA Kernels 2x Faster Than torch.compile
 :link: 02-cuda-agent.md
 
 An agent trained with large-scale RL to write CUDA kernels, beating

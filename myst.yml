@@ -57,7 +57,7 @@ project:
           file: vector-reads/00-overview.md
         - title: "Language Models Can Control Their Own Attention"
           file: vector-reads/01-declarative-attention.md
-        - title: "Teaching an LLM to Write Faster CUDA Than torch.compile"
+        - title: "Teaching an LLM to Write CUDA Kernels 2x Faster Than torch.compile"
           file: vector-reads/02-cuda-agent.md
 
 site:
