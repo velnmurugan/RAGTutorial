@@ -59,6 +59,8 @@ project:
           file: vector-reads/01-declarative-attention.md
         - title: "Teaching an LLM to Write CUDA Kernels 2x Faster Than torch.compile"
           file: vector-reads/02-cuda-agent.md
+        - title: "BDH-CQ: A Reasoning Model That Never Says a Word While It Thinks"
+          file: vector-reads/03-bdh-cq.md
 
 site:
   template: book-theme

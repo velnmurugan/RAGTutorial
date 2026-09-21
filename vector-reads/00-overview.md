@@ -22,4 +22,12 @@ An agent trained with large-scale RL to write CUDA kernels, beating
 torch.compile's own output 96.8% of the time.
 :::
 
+:::{card} BDH-CQ: A Reasoning Model That Never Says a Word While It Thinks
+:link: 03-bdh-cq.md
+
+A 150M-parameter model that reasons silently in latent space, learns new
+tasks from examples with no weight updates, and beats every prior
+cost-accuracy point on ARC-AGI-1.
+:::
+
 ::::
