@@ -61,6 +61,10 @@ project:
           file: vector-reads/02-cuda-agent.md
         - title: "BDH-CQ: A Reasoning Model That Never Says a Word While It Thinks"
           file: vector-reads/03-bdh-cq.md
+    - title: "Agentic AI: An Interactive Course"
+      children:
+        - title: "Chapter 1: What is an Agent?"
+          file: agentic-ai/01-what-is-an-agent.ipynb
 
 site:
   template: book-theme
@@ -109,6 +113,8 @@ site:
       url: /chapters/00-overview
     - title: "◈ Vector Reads"
       url: /vector-reads/00-overview
+    - title: "◎ Agentic AI"
+      url: /agentic-ai/01-what-is-an-agent
     - title: "GitHub ↗"
       url: https://github.com/velnmurugan
   parts:
