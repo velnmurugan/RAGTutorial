@@ -11,6 +11,11 @@ project:
     interactive RAG tutorial series.
   authors:
     - name: Velmurugan Narayanasamy
+  # Text is CC BY 4.0, code is MIT (see LICENSE). mystmd shows these as
+  # license badges on every page.
+  license:
+    content: CC-BY-4.0
+    code: MIT
   # OneSignal (web push notifications) requires its worker file to be served
   # from the site root, exactly as-is, at /OneSignalSDKWorker.js. static_files
   # copies it there without hashing or rendering a link — same mechanism
