@@ -1,0 +1,41 @@
+name: Paper scout
+
+on:
+  schedule:
+    - cron: "17 6 * * 1-5"      # weekdays at 06:17 UTC
+  workflow_dispatch:            # adds a "Run workflow" button in the Actions tab
+
+permissions:
+  contents: write               # to save the log and memory back to the repo
+  issues: write                 # to post the daily suggestions
+
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - name: Run the scout
+        run: python scout.py
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
+      - name: Post suggestions as an issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh issue create --title "Paper scout, $(date +%F)" --body-file digest.md
+
+      - name: Save log and memory
+        run: |
+          git config user.name "paper-scout"
+          git config user.email "paper-scout@users.noreply.github.com"
+          git add log seen.json
+          git commit -m "Scout run $(date +%F)" || echo "Nothing new to save"
+          git push

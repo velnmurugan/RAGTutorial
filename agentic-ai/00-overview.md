@@ -1,6 +1,6 @@
 # ◎ Agentic AI: An Interactive Course
 
-Eleven chapters, one running example (a paper scout that reads new AI
+Twelve chapters, one running example (a paper scout that reads new AI
 papers and suggests which ones to read), built from scratch. Every
 chapter follows the same shape: something breaks, you see exactly why,
 one fix gets introduced, and that fix reveals the next problem.
@@ -9,7 +9,8 @@ The course is organized around one idea: an agent isn't finished when
 it runs. After three chapters of foundations, the rest follows a
 build-then-calibrate loop: build the narrowest useful version, measure
 it, watch it on real use, find the patterns in its mistakes, fix them,
-and only then let it do more on its own.
+and only then let it do more on its own. The last chapter deploys a real
+one, on live papers, with your own API key.
 
 ## Foundations · Chapters 1-3
 
@@ -109,18 +110,25 @@ get worse at something none of them measure.
 
 ::::
 
-## Capstone · Chapter 11
+## Capstone · Chapters 11-12
 
-The whole loop one more time, one level up, and a final answer to how
-far up the dial the scout should go.
+The whole loop one more time, one level up, and then the real thing:
+the scout deployed on live papers, measured on real use.
 
-::::{grid} 1 1 1 1
+::::{grid} 1 1 2 2
 
 :::{card} Chapter 11 · The Capstone
 :link: 11-capstone.ipynb
 
 At "draft" the scout writes summaries, and some of its mistakes are the
 kind only a reader can catch.
+:::
+
+:::{card} Chapter 12 · Deploy Your Scout
+:link: 12-deploy-your-scout.ipynb
+
+Every paper and verdict so far was made up, so the scout has never met
+a real paper or a real model.
 :::
 
 ::::
