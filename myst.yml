@@ -63,8 +63,30 @@ project:
           file: vector-reads/03-bdh-cq.md
     - title: "Agentic AI: An Interactive Course"
       children:
+        - title: "Series Overview"
+          file: agentic-ai/00-overview.md
         - title: "Chapter 1: What is an Agent?"
           file: agentic-ai/01-what-is-an-agent.ipynb
+        - title: "Chapter 2: Letting a Model Decide"
+          file: agentic-ai/02-letting-a-model-decide.ipynb
+        - title: "Chapter 3: Tools and the Autonomy Dial"
+          file: agentic-ai/03-tools-and-autonomy.ipynb
+        - title: "Chapter 4: Scope and Curate Data"
+          file: agentic-ai/04-scope-and-data.ipynb
+        - title: "Chapter 5: Set Up v1"
+          file: agentic-ai/05-set-up-v1.ipynb
+        - title: "Chapter 6: Design Evals and Deploy"
+          file: agentic-ai/06-evals-and-deploy.ipynb
+        - title: "Chapter 7: Run Evals on Real Use"
+          file: agentic-ai/07-real-use.ipynb
+        - title: "Chapter 8: Find Error Patterns"
+          file: agentic-ai/08-error-patterns.ipynb
+        - title: "Chapter 9: Apply Fixes"
+          file: agentic-ai/09-apply-fixes.ipynb
+        - title: "Chapter 10: New Metrics and Earning Autonomy"
+          file: agentic-ai/10-new-metrics-and-autonomy.ipynb
+        - title: "Chapter 11: The Capstone"
+          file: agentic-ai/11-capstone.ipynb
 
 site:
   template: book-theme
@@ -114,7 +136,7 @@ site:
     - title: "◈ Vector Reads"
       url: /vector-reads/00-overview
     - title: "◎ Agentic AI"
-      url: /agentic-ai/01-what-is-an-agent
+      url: /agentic-ai/00-overview
     - title: "GitHub ↗"
       url: https://github.com/velnmurugan
   parts:
