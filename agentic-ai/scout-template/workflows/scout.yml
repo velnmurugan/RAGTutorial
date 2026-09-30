@@ -2,7 +2,7 @@ name: Paper scout
 
 on:
   schedule:
-    - cron: "17 6 * * 1-5"      # weekdays at 06:17 UTC
+    - cron: "17 8 * * 1-5"      # weekdays at 08:17 UTC, after the daily quota resets
   workflow_dispatch:            # adds a "Run workflow" button in the Actions tab
 
 permissions:
@@ -23,19 +23,21 @@ jobs:
       - run: pip install -r requirements.txt
 
       - name: Run the scout
-        run: python scout.py
+        run: python -u scout.py        # -u: show progress live in the log
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
       - name: Post suggestions as an issue
+        if: ${{ always() && hashFiles('digest.md') != '' }}   # even if the scout stopped early
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh issue create --title "Paper scout, $(date +%F)" --body-file digest.md
 
       - name: Save log and memory
+        if: ${{ always() }}                                    # never lose a run's work
         run: |
           git config user.name "paper-scout"
           git config user.email "paper-scout@users.noreply.github.com"
-          git add log seen.json
+          git add -A
           git commit -m "Scout run $(date +%F)" || echo "Nothing new to save"
           git push

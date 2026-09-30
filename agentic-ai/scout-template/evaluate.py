@@ -69,7 +69,6 @@ def scorecard():
     m["repeats"] = sum(c - 1 for c in counts.values())
     m["calls_per_paper"] = sum(r["calls"] for r in records) / len(records)
     m["full_text_rate"] = sum(r["read_full"] for r in judged) / len(judged) if judged else 0.0
-    m["reply_errors"] = sum(bool(r["error"]) for r in records)
 
     labels = load_labels()
     labeled = [(latest[i], rel) for i, rel in labels.items() if i in latest]

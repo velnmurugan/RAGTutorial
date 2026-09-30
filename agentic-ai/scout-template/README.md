@@ -13,8 +13,8 @@ Built in Chapter 12 of the Agentic AI course on
 |---|---|
 | `config.py` | Your interest, the guideline, categories, model, threshold |
 | `arxiv_source.py` | Tools: fetch new papers, read a paper's full text |
-| `judge.py` | Screen, read, decide, and check the reason for one paper |
-| `scout.py` | Runs the whole thing, writes `digest.md`, the log, and memory |
+| `judge.py` | Screen and decide on papers in batches, and check every reason |
+| `scout.py` | Runs the whole thing within a daily call budget; writes `digest.md`, the log, memory, and papers waiting for the next run |
 | `evaluate.py` | Scorecard on real use, and papers to label |
 | `.github/workflows/scout.yml` | Runs the scout every weekday and posts an issue |
 | `.github/workflows/evaluate.yml` | Scorecard and labeling, on demand |
@@ -27,7 +27,7 @@ Built in Chapter 12 of the Agentic AI course on
 3. **Actions** tab → **Paper scout** → **Run workflow**. After a few
    minutes, the suggestions appear in the **Issues** tab.
 
-After that it runs by itself on weekdays at 06:17 UTC.
+After that it runs by itself on weekdays at 08:17 UTC.
 
 ## Measuring it
 

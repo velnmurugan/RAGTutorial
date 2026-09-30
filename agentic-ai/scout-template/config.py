@@ -16,9 +16,9 @@ GUIDELINE = [
     "NOT RELEVANT: work on language models that doesn't involve documents (for example, hallucination checks without sources).",
 ]
 
-# Which arXiv categories to watch, and how many of the newest papers to check per run.
+# Which arXiv categories to watch, and how many of the newest papers to fetch per run.
 CATEGORIES = ["cs.CL", "cs.IR"]
-MAX_PAPERS = 25
+MAX_PAPERS = 100
 
 # Suggest a paper when the model's confidence is at least this (Chapter 6).
 THRESHOLD = 0.5
@@ -26,8 +26,14 @@ THRESHOLD = 0.5
 # The model. Override it without editing code by setting SCOUT_MODEL.
 MODEL = os.environ.get("SCOUT_MODEL", "gemini-3.5-flash")
 
-# Pause after every model call, to stay inside free-tier rate limits.
-SECONDS_BETWEEN_CALLS = 6
+# The free tier allows only a small number of model calls per day (check
+# yours at https://aistudio.google.com/rate-limit). The scout never makes
+# more than CALL_BUDGET calls in one run, and works in batches to fit.
+# Colab tests with the same key use the same daily allowance.
+CALL_BUDGET = 15
+SCREEN_BATCH = 25       # papers per screening call (titles and abstracts)
+VERDICT_BATCH = 4       # papers per verdict call (each with the start of its full text)
+FULL_TEXT_CHARS = 3000  # how much of each paper's full text the model gets
 
-# How much of a paper's full text the model gets (characters).
-FULL_TEXT_CHARS = 6000
+# Pause after every model call, to stay inside per-minute limits.
+SECONDS_BETWEEN_CALLS = 6
