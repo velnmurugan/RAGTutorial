@@ -1,9 +1,10 @@
 """The paper scout, v1.2 at the "suggest" setting.
 
 Run it with:  python scout.py
-It needs GEMINI_API_KEY in the environment. It writes four things:
+It needs GEMINI_API_KEY in the environment. It writes five things:
   digest.md           today's suggestions (posted as a GitHub issue)
   log/verdicts.jsonl  one line per paper decided, for measuring later
+  log/runs.jsonl      one line per run: calls, tokens, time, estimated cost
   seen.json           memory of papers already decided (Chapter 9)
   pending.json        papers waiting for the next run, so none get lost
 It never publishes, emails or changes anything else (Chapter 5).
@@ -18,12 +19,13 @@ import time
 import config
 from arxiv_source import fetch_new_papers, fetch_full_text
 from judge import (screen_prompt, verdict_prompt, parse_screen, parse_verdicts,
-                   make_record)
+                   make_record, ScreenReply, VerdictReply)
 
 HERE = pathlib.Path(__file__).parent
 SEEN = HERE / "seen.json"
 PENDING = HERE / "pending.json"
 LOG = HERE / "log" / "verdicts.jsonl"
+RUNS = HERE / "log" / "runs.jsonl"
 DIGEST = HERE / "digest.md"
 
 
@@ -36,7 +38,7 @@ class OutOfCalls(Exception):
 
 
 def gemini_ask():
-    """A function that sends a prompt to Gemini and returns the reply text."""
+    """A function that sends a prompt to Gemini and returns (reply text, usage)."""
     from google import genai
     from google.genai import types
 
@@ -44,17 +46,26 @@ def gemini_ask():
     if not key:
         sys.exit("GEMINI_API_KEY is not set. Add it as a secret (see README.md).")
     client = genai.Client(api_key=key)
-    # The scout runs its own tools in code, so the SDK's automatic tool calling stays off.
-    settings = types.GenerateContentConfig(
-        automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True))
 
-    def ask(prompt):
+    def ask(prompt, schema=None):
+        settings = types.GenerateContentConfig(
+            # The scout runs its own tools in code, so the SDK's automatic tool calling stays off.
+            automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True),
+            # Structured output: the model is asked to reply in exactly this shape.
+            response_mime_type="application/json" if schema else None,
+            response_schema=schema)
         for attempt in range(4):
             try:
-                reply = client.models.generate_content(
-                    model=config.MODEL, contents=prompt, config=settings).text
+                start = time.monotonic()
+                response = client.models.generate_content(
+                    model=config.MODEL, contents=prompt, config=settings)
+                meta = response.usage_metadata
+                usage = {"tokens_in": getattr(meta, "prompt_token_count", 0) or 0,
+                         "tokens_out": (getattr(meta, "candidates_token_count", 0) or 0)
+                                       + (getattr(meta, "thoughts_token_count", 0) or 0),
+                         "seconds": time.monotonic() - start}
                 time.sleep(config.SECONDS_BETWEEN_CALLS)
-                return reply or ""
+                return response.text or "", usage
             except Exception as error:
                 message = str(error)
                 if "PerDay" in message:                 # daily quota: retrying won't help today
@@ -69,12 +80,14 @@ def gemini_ask():
 
 
 class Budget:
-    """Counts model calls, and refuses once CALL_BUDGET is reached."""
+    """Counts model calls, tokens and time, and refuses once CALL_BUDGET is reached."""
 
     def __init__(self, ask, limit):
         self.ask, self.limit, self.used, self.stopped = ask, limit, 0, None
+        self.tokens_in = self.tokens_out = 0
+        self.seconds = 0.0
 
-    def __call__(self, prompt):
+    def __call__(self, prompt, schema=None):
         if self.stopped:
             raise OutOfCalls(self.stopped)
         if self.used >= self.limit:
@@ -82,10 +95,15 @@ class Budget:
             raise OutOfCalls(self.stopped)
         self.used += 1
         try:
-            return self.ask(prompt)
+            result = self.ask(prompt, schema)
         except OutOfCalls as error:
             self.stopped = str(error)
             raise
+        text, usage = result if isinstance(result, tuple) else (result, {})
+        self.tokens_in += usage.get("tokens_in", 0)
+        self.tokens_out += usage.get("tokens_out", 0)
+        self.seconds += usage.get("seconds", 0.0)
+        return text
 
 
 def chunks(items, size):
@@ -121,7 +139,9 @@ def make_digest(records, today, fetched, waiting, note):
 def run(ask=None, papers=None, fetch_full=None):
     ask = Budget(ask or gemini_ask(), config.CALL_BUDGET)
     fetch_full = fetch_full or fetch_full_text
-    today = datetime.date.today().isoformat()
+    started = time.monotonic()
+    now = datetime.datetime.now(datetime.timezone.utc)
+    today, run_id = now.date().isoformat(), now.strftime("%Y%m%dT%H%M%SZ")
     seen = set(json.loads(SEEN.read_text())) if SEEN.exists() else set()
     pending = json.loads(PENDING.read_text()) if PENDING.exists() else []
     if papers is None:
@@ -148,7 +168,8 @@ def run(ask=None, papers=None, fetch_full=None):
         seen.add(paper["base_id"])
         queue.pop(paper["base_id"], None)
         with LOG.open("a", encoding="utf-8") as f:            # saved as we go
-            f.write(json.dumps(dict(record, date=today, model=config.MODEL), ensure_ascii=False) + "\n")
+            f.write(json.dumps(dict(record, date=today, run_id=run_id, model=config.MODEL,
+                                    prompt_version=config.PROMPT_VERSION), ensure_ascii=False) + "\n")
         if record["stage"] == "judged":                       # screened-out papers are only counted
             print(f"   {record['verdict']:>7} ({record['confidence']:.2f})  {paper['title'][:70]}")
 
@@ -157,7 +178,7 @@ def run(ask=None, papers=None, fetch_full=None):
         for batch in chunks([p for p in queue.values() if not p.get("passed_screen")],
                             config.SCREEN_BATCH):
             try:
-                plausible = parse_screen(ask(screen_prompt(batch)), len(batch))
+                plausible = parse_screen(ask(screen_prompt(batch), ScreenReply), len(batch))
             except ModelUnavailable:
                 failures += 1
                 if failures >= 2:
@@ -179,7 +200,7 @@ def run(ask=None, papers=None, fetch_full=None):
                             config.VERDICT_BATCH):
             texts = [fetch_full(p["id"], config.FULL_TEXT_CHARS) for p in batch]
             try:
-                verdicts = parse_verdicts(ask(verdict_prompt(batch, texts)), len(batch))
+                verdicts = parse_verdicts(ask(verdict_prompt(batch, texts), VerdictReply), len(batch))
             except ModelUnavailable:
                 failures += 1
                 if failures >= 2:
@@ -203,7 +224,20 @@ def run(ask=None, papers=None, fetch_full=None):
         DIGEST.write_text(make_digest(records, today, len(papers), len(queue),
                                       note or "some replies could not be read"),
                           encoding="utf-8")
-    print(f"Model calls used: {ask.used} of {config.CALL_BUDGET}")
+        cost = (ask.tokens_in * config.PRICE_INPUT_PER_M
+                + ask.tokens_out * config.PRICE_OUTPUT_PER_M) / 1_000_000
+        with RUNS.open("a", encoding="utf-8") as f:           # one line per run (observability)
+            f.write(json.dumps({
+                "run_id": run_id, "date": today, "model": config.MODEL,
+                "prompt_version": config.PROMPT_VERSION, "fetched": len(papers),
+                "decided": len(records), "suggested": sum(r["verdict"] == "suggest" for r in records),
+                "waiting": len(queue), "stopped_because": note or None, "calls": ask.used,
+                "tokens_in": ask.tokens_in, "tokens_out": ask.tokens_out,
+                "model_seconds": round(ask.seconds, 1),
+                "run_seconds": round(time.monotonic() - started, 1),
+                "est_cost_usd": round(cost, 4)}) + "\n")
+    print(f"Model calls used: {ask.used} of {config.CALL_BUDGET}, "
+          f"tokens in/out: {ask.tokens_in}/{ask.tokens_out}")
     return records
 
 

@@ -92,7 +92,7 @@ project:
           file: agentic-ai/10-new-metrics-and-autonomy.ipynb
         - title: "Chapter 11: The Capstone"
           file: agentic-ai/11-capstone.ipynb
-        - title: "Chapter 12: Deploy Your Scout"
+        - title: "Chapter 12: Deploy Your Scout (Production Lab)"
           file: agentic-ai/12-deploy-your-scout.ipynb
 
 site:

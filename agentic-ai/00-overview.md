@@ -1,16 +1,24 @@
 # ◎ Agentic AI: An Interactive Course
 
-Twelve chapters, one running example (a paper scout that reads new AI
-papers and suggests which ones to read), built from scratch. Every
-chapter follows the same shape: something breaks, you see exactly why,
-one fix gets introduced, and that fix reveals the next problem.
+Twelve chapters, one running example: a paper scout that reads new AI
+papers and suggests which ones are worth my time. I built it because
+picking a paper for Vector Reads every week starts with skimming a
+hundred abstracts, and I wanted to see how far a small agent could take
+that over.
 
-The course is organized around one idea: an agent isn't finished when
-it runs. After three chapters of foundations, the rest follows a
-build-then-calibrate loop: build the narrowest useful version, measure
-it, watch it on real use, find the patterns in its mistakes, fix them,
-and only then let it do more on its own. The last chapter deploys a real
-one, on live papers, with your own API key.
+Every chapter starts from something that breaks, looks at why, adds one
+fix, and runs into the next problem. The first three chapters build the
+agent. The rest follow the CC/CD lifecycle (Continuous Development and
+Continuous Calibration, from Aishwarya Reganti and Kiriti Badam's
+article *Why your AI product needs a different development lifecycle*):
+build the narrowest useful version, measure it, watch it on real use,
+find the patterns in its mistakes, fix them, and only then let it do
+more on its own. The last chapter deploys it on live arXiv papers with a
+real model.
+
+Chapters 1 to 11 run in your browser with hand-written stand-in model
+replies, so every reader hits the same failures. Chapter 12 needs Colab
+and a free Gemini API key.
 
 ## Foundations · Chapters 1-3
 
@@ -124,11 +132,11 @@ At "draft" the scout writes summaries, and some of its mistakes are the
 kind only a reader can catch.
 :::
 
-:::{card} Chapter 12 · Deploy Your Scout
+:::{card} Chapter 12 · Deploy Your Scout (Production Lab)
 :link: 12-deploy-your-scout.ipynb
 
-Every paper and verdict so far was made up, so the scout has never met
-a real paper or a real model.
+The real scout on live arXiv papers: daily call limits, outages,
+tests, deployment, cost, and an attempt to trick it.
 :::
 
 ::::

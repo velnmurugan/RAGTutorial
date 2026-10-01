@@ -26,6 +26,16 @@ THRESHOLD = 0.5
 # The model. Override it without editing code by setting SCOUT_MODEL.
 MODEL = os.environ.get("SCOUT_MODEL", "gemini-3.5-flash")
 
+# Bump this whenever you change a prompt or the guideline. Every log line
+# records it, so you can tell which prompt produced which verdict.
+PROMPT_VERSION = "v1.3"
+
+# Paid-tier list prices for the model, in US dollars per million tokens
+# (gemini-3.5-flash, checked October 2026). Only used to estimate cost in
+# evaluate.py; on the free tier you pay nothing.
+PRICE_INPUT_PER_M = 1.50
+PRICE_OUTPUT_PER_M = 9.00
+
 # The free tier allows only a small number of model calls per day (check
 # yours at https://aistudio.google.com/rate-limit). The scout never makes
 # more than CALL_BUDGET calls in one run, and works in batches to fit.

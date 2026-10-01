@@ -11,12 +11,21 @@ API = "https://export.arxiv.org/api/query"
 HEADERS = {"User-Agent": "paper-scout (Agentic AI course, vectorspace.blog)"}
 
 
-def _get(url, timeout=30):
+def _get(url, timeout=60, attempts=1):
+    """Download a page. arXiv is sometimes slow, so the API call gets a few tries."""
     request = urllib.request.Request(url, headers=HEADERS)
-    with urllib.request.urlopen(request, timeout=timeout) as response:
-        text = response.read().decode("utf-8", errors="replace")
-    time.sleep(3)          # arXiv asks for at most one request every 3 seconds
-    return text
+    for attempt in range(1, attempts + 1):
+        try:
+            with urllib.request.urlopen(request, timeout=timeout) as response:
+                text = response.read().decode("utf-8", errors="replace")
+            time.sleep(3)      # arXiv asks for at most one request every 3 seconds
+            return text
+        except Exception as error:
+            if attempt == attempts:
+                raise
+            wait = 20 * attempt
+            print(f"   arXiv request failed ({type(error).__name__}), retrying in {wait}s")
+            time.sleep(wait)
 
 
 def parse_feed(xml_text):
@@ -46,7 +55,7 @@ def fetch_new_papers(categories, max_results):
         "sortOrder": "descending",
         "max_results": max_results,
     })
-    return parse_feed(_get(f"{API}?{params}"))
+    return parse_feed(_get(f"{API}?{params}", timeout=90, attempts=4))
 
 
 class _TextOnly(HTMLParser):
@@ -78,7 +87,7 @@ def html_to_text(html):
 def fetch_full_text(arxiv_id, max_chars):
     """The start of the paper's HTML version, or None if arXiv has no HTML for it."""
     try:
-        html = _get(f"https://arxiv.org/html/{arxiv_id}")
+        html = _get(f"https://arxiv.org/html/{arxiv_id}", timeout=30)
     except Exception:
         return None
     text = html_to_text(html)
